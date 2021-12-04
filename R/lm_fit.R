@@ -37,7 +37,6 @@ lm_fit <- function (formula, data){
     print("Invertible matrix results failure to fit the model...")
     return(NULL)
   }
-
   ##2.3 obtain coefficients
   beta_hat <- solve(t(X) %*% X) %*% t(X) %*% Y
   Y_hat <- X %*% beta_hat
@@ -57,10 +56,9 @@ lm_fit <- function (formula, data){
   se_beta <- sqrt(diag(var_beta))
   t_stat <- beta_hat / se_beta
   t_p <- 2 * (1 - pt(abs(t_stat), nrow-ncol))
-  coeffcient <- cbind(beta_hat, se_beta, t_stat, t_p)
-  colnames(coeffcient) <- c("Estimate", "Std. Error", "t value", "Pr(>|t|)")
-  rownames(coeffcient) <- colnames(X)
-  coeffcient_Table <- cbind(rownames(coeffcient), c(round(beta_hat, 5)))
+  par_info <- cbind(beta_hat, se_beta, t_stat, t_p)
+  colnames(par_info) <- c("Estimate", "Std. Error", "t value", "Pr(>|t|)")
+  rownames(par_info) <- colnames(X)
 
   R_2 <- SSR/SSY
   R_2adj <- 1 - (SSE/(nrow-ncol))/(SSY/(nrow-1))
@@ -68,21 +66,31 @@ lm_fit <- function (formula, data){
   F_stat <- (SSR/(ncol-1))/(SSE/(nrow-ncol))
   F_p = 1 - pf(F_stat, ncol-1, nrow-ncol)
 
+  z <- list(coefficients = beta_hat,
+            residuals = residuals,
+            fitted.values = Y_hat,
+            MSE = sigma_2hat,
+            n = nrow,
+            p = ncol,
+            par_info = par_info,
+            R_square = R_2,
+            R_square_adjusted = R_2adj,
+            t_statistics = t_stat,
+            t_pvalue = t_p,
+            F_statistics = F_stat,
+            F_pvalue = F_p,
+            terms = term,
+            model = deparse(match.call()))
 
   #4. report the result
+  ##4.1 prepare
+  coeffcient_Table <- beta_hat
+  colnames(coeffcient_Table) <- "Estimated"
+  ##4.2 output the result
   cat("\nCall:\n")
-  cat(paste(deparse(match.call())), "\n")
-
+  cat(deparse(match.call()), "\n")
   cat("\nCoefficients:\n")
+  printCoefmat(coeffcient_Table, digits = 6)
 
-  cat(coeffcient_Table[,1], sep = "   ", "\n")
-  cat(coeffcient_Table[,2], sep = "   ", "\n")
+  return(z)
 }
-
-
-
-
-
-data(mtcars)
-d <-  mtcars
-mm <- lm_fit(mpg ~ hp+wt,data = d)
