@@ -66,7 +66,9 @@ lm_fit <- function (formula, data){
   F_stat <- (SSR/(ncol-1))/(SSE/(nrow-ncol))
   F_p = 1 - pf(F_stat, ncol-1, nrow-ncol)
 
-  z <- list(coefficients = beta_hat,
+  z <- list(Y = Y,
+            X = X,
+            coefficients = beta_hat,
             residuals = residuals,
             fitted.values = Y_hat,
             MSE = sigma_2hat,
