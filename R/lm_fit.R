@@ -19,7 +19,7 @@ lm_fit <- function (formula, data){
   ncol <- dim(mf)[2]
   Y <-  mf[,1]
   if (intercept == 1){
-    X <- cbind('(Intercept)'=rep(1,nrow), mf[,2:ncol])
+    X <- cbind("(Intercept)"=rep(1,nrow), mf[,2:ncol])
   } else {
     X <- mf[,2:ncol]
   }
@@ -37,14 +37,6 @@ lm_fit <- function (formula, data){
     print("Invertible matrix results failure to fit the model...")
     return(NULL)
   }
-  ###2.2.3 incompatible dimensions?????
-  #if (NROW(y) != n)
-    #stop("incompatible dimensions")
-  ###2.2.4?????
-  #if (is.null(n <- nrow(x)))
-    #stop("'x' must be a matrix")
-  #if (n == 0L)
-    #stop("0 (non-NA) cases")
 
   ##2.3 obtain coefficients
   beta_hat <- solve(t(X) %*% X) %*% t(X) %*% Y
@@ -68,6 +60,7 @@ lm_fit <- function (formula, data){
   coeffcient <- cbind(beta_hat, se_beta, t_stat, t_p)
   colnames(coeffcient) <- c("Estimate", "Std. Error", "t value", "Pr(>|t|)")
   rownames(coeffcient) <- colnames(X)
+  coeffcient_Table <- cbind(rownames(coeffcient), c(round(beta_hat, 5)))
 
   R_2 <- SSR/SSY
   R_2adj <- 1 - (SSE/(nrow-ncol))/(SSY/(nrow-1))
@@ -77,13 +70,13 @@ lm_fit <- function (formula, data){
 
 
   #4. report the result
-  cat("\nCall:\n",
-      paste(deparse(match.call()), sep = "\n", collapse = "\n"), "\n\n", sep = "")
-  cat("Residuals:\n", sep = "")
+  cat("\nCall:\n")
+  cat(paste(deparse(match.call())), "\n")
 
-  cat("\nCoefficients:\n", sep = "")
-  printCoefmat(coeffcient, P.values = TRUE)
+  cat("\nCoefficients:\n")
 
+  cat(coeffcient_Table[,1], sep = "   ", "\n")
+  cat(coeffcient_Table[,2], sep = "   ", "\n")
 }
 
 
@@ -92,4 +85,4 @@ lm_fit <- function (formula, data){
 
 data(mtcars)
 d <-  mtcars
-mm <- lm_new(mpg ~ hp+wt,data = d)
+mm <- lm_fit(mpg ~ hp+wt,data = d)
