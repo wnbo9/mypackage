@@ -43,14 +43,9 @@ lm_fit <- function (formula, data){
   ###2.2.1 insufficient data
   if (nrow < ncol) {
     print("Insufficient data to fit coefficients of the model...")
-    return(NULL)
+    return(-1)
   }
-  ###2.2.2 invertible matrix t(X)*X
-  mat <- try(solve(t(X) %*% X), silent = T)
-  if (class(mat)[1] == "try-error"){
-    print("Invertible matrix results failure to fit the model...")
-    return(NULL)
-  }
+
   ##2.3 obtain coefficients
   beta_hat <- solve(t(X) %*% X) %*% t(X) %*% Y
   Y_hat <- X %*% beta_hat

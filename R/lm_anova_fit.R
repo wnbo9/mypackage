@@ -7,7 +7,7 @@
 #'@return the SSR of the given matrix
 #'
 #'@examples
-#'ax <- mt_cars[,1:4]
+#'ax <- mt_cars[,1:3]
 #'lm_anova_fit(ax)
 #'
 #'@export

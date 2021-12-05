@@ -1,8 +1,8 @@
 test_that("multiplication works", {
-  x = c(1:1000)
-  y = c(1:1000)
-  dat = cbind(y, x)
+  dat = mt_cars[,1:3]
   dat = data.frame(dat)
-  colnames(dat) = c("y", "x")
-  expect_warning(lm_fit(y~x, dat))
+
+  expect_equal(class(lm_fit(mpg ~ cyl, dat)), "list")
+  expect_equal(lm_fit(mpg ~ cyl, dat)$p, 2)
+  expect_equal(lm_fit(mpg ~ cyl + disp, dat[1:2,]), -1)
 })
