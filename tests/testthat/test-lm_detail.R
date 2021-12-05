@@ -4,5 +4,5 @@ test_that("lm_detail works", {
   xx <- data.frame(xx)
   colnames(xx) <- c("outcome", "x1", "x2")
   m1 <- lm_fit(outcome ~ x1 + x2, xx)
-  expect_equal(class(lm_detail(m1)), "numeric")
+  expect_equal(class(lm_detail(m1)), "NULL")
 })
