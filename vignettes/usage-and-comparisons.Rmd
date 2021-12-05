@@ -1,0 +1,71 @@
+---
+title: "The way of mypackage: usage and comparisons"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{How to do stuff}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Fit the model
+```{r setup}
+library(mypackage)
+
+dat = mt_cars
+m1 <- lm_fit(mpg ~ cyl + disp, data = mt_cars)
+```
+
+## Output the detials of the fit
+```{r}
+lm_detail(m1)
+```
+
+## Output the ANOVA table of the fit
+```{r}
+lm_anova(m1)
+```
+
+## Get the SSR of one matrix from some step of lm_fit
+```{r}
+X <- m1[["X"]]
+Y <- m1[["Y"]]
+adata <- cbind(Y, X)
+ax = adata[,1:3]
+lm_anova_fit(ax)
+```
+
+# Comparisons
+## Correctness
+```{r}
+m2 <- lm(mpg ~ cyl + disp, data = mt_cars)
+m2
+
+summary(m2)
+
+anova(m2)
+```
+
+## Efficiency
+```{r}
+# simulate data
+set.seed(2021)
+dat <- matrix(rnorm(10000*1000, 0, 1), 10000, 1000)
+dat <- data.frame(dat)
+colnames(dat) <- c('y', paste0("x", rep(1:999)))
+
+# lm_fit efficiency
+system.time(m3 <- lm_fit(y ~ x1 + x2 + x3, data = dat))
+system.time(m4 <- lm(y ~ x1 + x2 + x3, data = dat))
+
+# lm_anova efficiency
+system.time(lm_anova(m3))
+system.time(anova(m4))
+```
+From this part, we can see that our functions are correct, however, it is much slower compared with `lm' function and `anova` function. Therefore, it is necessary to use Rcpp to speed up the process.
