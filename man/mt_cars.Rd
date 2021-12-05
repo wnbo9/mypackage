@@ -3,7 +3,7 @@
 \docType{data}
 \name{mt_cars}
 \alias{mt_cars}
-\title{mt_cars}
+\title{Motor Trend Car Road Tests}
 \format{
 A data frame with 32 observations on 11 (numeric) variables.
 \describe{
@@ -25,6 +25,6 @@ A data frame with 32 observations on 11 (numeric) variables.
 mt_cars
 }
 \description{
-Motor Trend Car Road Tests
+The data was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973–74 models).
 }
 \keyword{datasets}
