@@ -1,3 +1,17 @@
+#'Linear Regression Fit
+#'
+#'Conduct the Analysis of Variance (ANOVA) and output the ANOVA table
+#'
+#'@param formula an object of class "formula" (or one that can be coerced to that class): a symbolic description of the model to be fitted.
+#'@param data an optional data frame, list or environment (or object coercible by as.data.frame to a data frame) containing the variables in the model.
+#'
+#'@return a list containing sufficient information
+#'
+#'@examples
+#'m1 <- lm_fit(mpg ~ cyl + disp, data = mt_cars)
+#'
+#'@export
+#'
 lm_fit <- function (formula, data){
 
   #1. get the formula of the fitted model and the data to fit the model

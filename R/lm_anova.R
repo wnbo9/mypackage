@@ -1,3 +1,17 @@
+#'Linear Regression Anova
+#'
+#'Conduct the Analysis of Variance (ANOVA) and output the ANOVA table
+#'
+#'@param x input list obtained from lm_fit, consisting of sufficient information
+#'
+#'@return the ANOVA table
+#'
+#'@examples
+#'m1 <- lm_fit(mpg ~ cyl + disp, data = mt_cars)
+#'lm_anova(m1)
+#'
+#'@export
+#'
 lm_anova <- function(x){
   cat("Analysis of Variance Table:\n")
   cat("Response:", as.character(x[["terms"]][[2]]), "\n")

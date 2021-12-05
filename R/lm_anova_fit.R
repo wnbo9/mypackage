@@ -1,3 +1,17 @@
+#'Linear Regression Anova Fit
+#'
+#'Get the sum of squares due to regression (SSR), of a given matrix
+#'
+#'@param x input matrix, consisting of Y and X
+#'
+#'@return the SSR of the given matrix
+#'
+#'@examples
+#'ax <- mt_cars[,1:4]
+#'lm_anova_fit(ax)
+#'
+#'@export
+#'
 lm_anova_fit <- function(x){
   Y <- x[,1]
   X <- x[,-1]

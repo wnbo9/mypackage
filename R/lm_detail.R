@@ -1,3 +1,17 @@
+#'Linear Regression Detail
+#'
+#'Output the details of the linear regression results
+#'
+#'@param x input list obtained from lm_fit, consisting of sufficient information
+#'
+#'@return the details of linear regression
+#'
+#'@examples
+#'m1 <- lm_fit(mpg ~ cyl + disp, data = mt_cars)
+#'lm_detail(m1)
+#'
+#'@export
+#'
 lm_detail <- function(x){
 
   cat("\nCall:\n")
