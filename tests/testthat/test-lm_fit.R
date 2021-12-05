@@ -1,4 +1,4 @@
-test_that("multiplication works", {
+test_that("lm_fit works", {
   dat = mt_cars[,1:3]
   dat = data.frame(dat)
 
