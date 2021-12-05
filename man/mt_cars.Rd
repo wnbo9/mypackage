@@ -5,21 +5,26 @@
 \alias{mt_cars}
 \title{mt_cars}
 \format{
-A data frame with 53940 rows and 10 variables:
+A data frame with 32 observations on 11 (numeric) variables.
 \describe{
-  \item{price}{price, in US dollars}
-  \item{carat}{weight of the diamond, in carats}
+  \item{mpg}{Miles/(US) gallon}
+  \item{cyl}{Number of cylinders}
+  \item{disp}{Displacement (cu.in.)}
+  \item{hp}{Gross horsepower}
+  \item{drat}{Rear axle ratio}
+  \item{wt}{Weight (1000 lbs)}
+  \item{qsec}{1/4 mile time}
+  \item{vs}{Engine (0 = V-shaped, 1 = straight)}
+  \item{am}{Transmission (0 = automatic, 1 = manual)}
+  \item{gear}{Number of forward gears}
+  \item{carb}{Number of carburetors}
   ...
 }
-}
-\source{
-\url{http://www.diamondse.info/}
 }
 \usage{
 mt_cars
 }
 \description{
-A dataset containing the prices and other attributes of almost 54,000
-diamonds.
+Motor Trend Car Road Tests
 }
 \keyword{datasets}
