@@ -15,7 +15,7 @@ lm_fit(formula, data)
 a list containing sufficient information
 }
 \description{
-Conduct the Analysis of Variance (ANOVA) and output the ANOVA table
+Conduct the linear regression and output basic information
 }
 \examples{
 m1 <- lm_fit(mpg ~ cyl + disp, data = mt_cars)
