@@ -1,6 +1,6 @@
 #'Linear Regression Fit
 #'
-#'Conduct the Analysis of Variance (ANOVA) and output the ANOVA table
+#'Conduct the linear regression and output basic information
 #'
 #'@param formula an object of class "formula" (or one that can be coerced to that class): a symbolic description of the model to be fitted.
 #'@param data an optional data frame, list or environment (or object coercible by as.data.frame to a data frame) containing the variables in the model.
